@@ -1,6 +1,6 @@
 const Card = ({ service, addToCart, removeFromCart, cartItems }) => {
   const cartItem = cartItems.find(
-    (item) => item.id === service.id
+    (item) => item.id === service.id  // item-->cartItem[]
   );
 
   const currentQuantity = cartItem ? cartItem.quantity : 0;

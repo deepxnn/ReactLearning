@@ -11,7 +11,7 @@ const App = () => {
 
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (service) => {
+  const addToCart = () => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(
         (item) => item.id === service.id
@@ -19,7 +19,7 @@ const App = () => {
 
       if (existingItem) {
         if (existingItem.quantity >= service.available) {
-          return prevItems; // limit reached
+          return prevItems; 
         }
 
         return prevItems.map((item) =>
@@ -33,7 +33,7 @@ const App = () => {
     });
   };
 
-  const removeFromCart = (service) => {
+  const removeFromCart = () => {
     setCartItems((prevItems) =>
       prevItems
         .map((item) =>
