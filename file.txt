@@ -1,0 +1,8 @@
+actually ---> dom --> document ---> expense --> it take time
+
+virtual dom ---> terminal
+
+
+any changes to file ----> update virtual ---> virtual dom and actual dom synced
+
+
