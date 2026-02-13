@@ -4,7 +4,6 @@ import {
   Typography,
   Button,
   Box,
-  Divider,
   CardMedia
 } from "@mui/material";
 
@@ -62,7 +61,7 @@ export const Cart = ({
               </Box>
             ))}
 
-            <Divider />
+            
 
             <Typography variant="h6" mt={2}>
               Total: ₹{totalAmount}
