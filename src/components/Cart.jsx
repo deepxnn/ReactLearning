@@ -1,33 +1,88 @@
-const Cart = ({ cartItems }) => {
-  return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        marginTop: 16,
-        padding: 16,
-      }}
-    >
-      <h1>Cart</h1>
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  Divider,
+  CardMedia
+} from "@mui/material";
 
-      {cartItems.length > 0 ? (
-        cartItems.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: 16,
-              marginBottom: 8,
-            }}
-          >
-            <h2>{item.title}</h2>
-            <p>Price: {item.price}</p>
-            <p>No: {item.quantity}</p>
-          </div>
-        ))
-      ) : (
-        <p>No items in the cart</p>
-      )}
-    </div>
+
+export const Cart = ({
+  cartItems,
+  totalAmount,
+  handleBuyNow,
+}) => {
+  return (
+    <Card sx={{width:"20%", mt: 4 }} elevation={4}>
+      <CardContent>
+        <Typography variant="h5" gutterBottom>
+          Cart
+        </Typography>
+
+        {cartItems.length > 0 ? (
+          <>
+            {cartItems.map((item) => (
+              <Box
+                key={item.id}
+                display="flex"
+                alignItems="center"
+                gap={2}
+                mb={2}
+              >
+                <CardMedia
+                  component="img"
+                  image={item.image}
+                  alt={item.title}
+                  sx={{
+                    width: 150,
+                    height: 80,
+                    objectFit: "cover",
+                    borderRadius: 2
+                  }}
+                />
+                <Box>
+                  <Typography variant="subtitle1">
+                    {item.title}
+                  </Typography>
+
+                  <Typography>
+                    Price: ₹{item.price}
+                  </Typography>
+
+                  <Typography>
+                    Quantity: {item.quantity}
+                  </Typography>
+
+                  <Typography>
+                    Subtotal: ₹{item.price * item.quantity}
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+
+            <Divider />
+
+            <Typography variant="h6" mt={2}>
+              Total: ₹{totalAmount}
+            </Typography>
+
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ mt: 2 }}
+              onClick={handleBuyNow}
+            >
+              Buy Now
+            </Button>
+          </>
+        ) : (
+          <Typography>
+            No items in the cart
+          </Typography>
+        )}
+      </CardContent>
+    </Card>
   );
 };
-export default Cart;
