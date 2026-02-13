@@ -7,22 +7,13 @@ import {
   CardMedia
 } from "@mui/material";
 
-const CardComponent = ({
-  service,
-  addToCart,
-  removeFromCart,
-  cartItems,
-}) => {
-  const cartItem = cartItems.find(
-    (item) => item.id === service.id
-  );
+const CardComponent = ({service,addToCart,removeFromCart,cartItems,}) => {
+  const cartItem = cartItems.find((item) => item.id === service.id);
 
-  const currentQuantity = cartItem
-    ? cartItem.quantity
-    : 0;
+  const currentQuantity = cartItem? cartItem.quantity: 0;
 
-  const isLimitReached =
-    currentQuantity >= service.available;
+  const isLimitReached = currentQuantity >= service.available;
+
   return (
     <Card elevation={3} sx={{width:"20%", mb:3}}>
       <CardMedia
