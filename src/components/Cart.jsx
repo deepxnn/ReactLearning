@@ -61,8 +61,6 @@ export const Cart = ({
               </Box>
             ))}
 
-            
-
             <Typography variant="h6" mt={2}>
               Total: ₹{totalAmount}
             </Typography>
