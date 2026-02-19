@@ -1,81 +1,26 @@
-import { useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import CardComponent from "./components/Card";
 import { Cart } from "./components/Cart";
-import webImage from "./assets/Web.jpg";
-import graphicImage from "./assets/Graphic.png";
 import { useNavigate } from "react-router";
 import Layout from "./Layout";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "./store/cartSlice";
 
 const App = () => {
   const navigate = useNavigate();
-  const [services, setServices] = useState([
-    {
-      id: 1,
-      title: "Web Development",
-      price: 1000,
-      available: 2,
-      image: webImage,
-    },
-    {
-      id: 2,
-      title: "Graphic Design",
-      price: 800,
-      available: 3,
-      image: graphicImage,
-    },
-  ]);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const services = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
 
-  const [cartItems, setCartItems] = useState([]);
-
-  const addToCart = (service) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === service.id);
-
-      if (existingItem) {
-        if (existingItem.quantity >= service.available) {
-          return prevItems;
-        }
-
-        return prevItems.map((item) =>
-          item.id === service.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
-      }
-
-      return [...prevItems, { ...service, quantity: 1 }];
-    });
+  const addToCartCall = (service) => {
+    dispatch(addToCart(service));
   };
 
-  const removeFromCart = (service) => {
-    setCartItems((prevItems) =>
-      prevItems
-        .map((item) =>
-          item.id === service.id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
+  const removeFromCartCall = (service) => {
+    dispatch(removeFromCart(service));
   };
 
   const handleBuyNow = () => {
-    // setServices((prevServices) =>
-    //   prevServices.map((service) => {
-    //     const cartItem = cartItems.find((item) => item.id === service.id);
-
-    //     if (cartItem) {
-    //       return {
-    //         ...service,
-    //         available: service.available - cartItem.quantity,
-    //       };
-    //     }
-
-    //     return service;
-    //   }),
-    // );
-    // setCartItems([]);
     navigate("/cart/453?shop=MyShop");
   };
 
@@ -93,8 +38,8 @@ const App = () => {
           <Box key={service.id} mb={3}>
             <CardComponent
               service={service}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
+              addToCart={addToCartCall}
+              removeFromCart={removeFromCartCall}
               cartItems={cartItems}
             />
           </Box>

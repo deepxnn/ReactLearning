@@ -6,3 +6,15 @@ virtual dom ---> terminal
 any changes to file ----> update virtual ---> virtual dom and actual dom synced
 
 
+
+
+redux
+
+state management - react - unidirection
+
+
+redux
+
+<Redux> -- state
+<App> --> access state -> any component
+</Redux>
